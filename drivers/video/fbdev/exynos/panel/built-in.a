@@ -1,0 +1,51 @@
+!<thin>
+//                                              378       `
+panel_modes.o/
+timenval.o/
+panel.o/
+panel_bl.o/
+dimming.o/
+panel_drv.o/
+panel_irc.o/
+panel_vrr.o/
+panel_debug.o/
+mdnie.o/
+sysfs.o/
+copr.o/
+dpui.o/
+panel_notify.o/
+panel_poc.o/
+aod/aod_drv.o/
+panel_spi.o/
+df/dynamic_freq.o/
+display_profiler/display_profiler.o/
+display_profiler/maskgen.o/
+mafpc/mafpc_drv.o/
+s6e3hab/s6e3hab.o/
+s6e3hab/s6e3hab_aod.o/
+s6e3hab/s6e3hab_profiler.o/
+
+/0              0           0     0     644     78944     `
+/15             0           0     0     644     11112     `
+/27             0           0     0     644     486736    `
+/36             0           0     0     644     368568    `
+/48             0           0     0     644     140784    `
+/59             0           0     0     644     711928    `
+/72             0           0     0     644     19920     `
+/85             0           0     0     644     330064    `
+/98             0           0     0     644     308848    `
+/113            0           0     0     644     416768    `
+/122            0           0     0     644     617152    `
+/131            0           0     0     644     392640    `
+/139            0           0     0     644     168096    `
+/147            0           0     0     644     43040     `
+/163            0           0     0     644     459112    `
+/176            0           0     0     644     384328    `
+/191            0           0     0     644     389560    `
+/204            0           0     0     644     329664    `
+/223            0           0     0     644     414176    `
+/260            0           0     0     644     22648     `
+/288            0           0     0     644     403288    `
+/307            0           0     0     644     3348832   `
+/326            0           0     0     644     213504    `
+/349            0           0     0     644     227464    `
