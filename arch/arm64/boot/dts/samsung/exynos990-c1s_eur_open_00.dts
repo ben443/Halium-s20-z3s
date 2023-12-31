@@ -1018,8 +1018,9 @@
 
 			sound {
 				compatible = "samsung,picasso-prince";
-				clock-names = "xclkout";
-				clocks = <0xffffffff 0x385>;
+				sound-max-frequency = <0xc65d40>;
+				clock-names = "pclk\0sclk";
+				clocks = <0xffffffff 0x84 0xffffffff 0x9a>;
 				pinctrl-names = "default";
 				pinctrl-0 = <0x0e>;
 				MICBIAS1-supply = <0x0f>;

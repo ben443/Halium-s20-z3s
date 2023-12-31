@@ -996,13 +996,16 @@
 
 			sound {
 				compatible = "samsung,picasso-prince";
-				clock-names = "xclkout";
-				clocks = <0xffffffff 0x385>;
-				MICBIAS1-supply = <0x0d>;
-				MICBIAS2-supply = <0x0e>;
-				MICBIAS3-supply = <0x0f>;
-				samsung,routing = "DMIC1\0MICBIAS1\0DMIC2\0MICBIAS2\0DMIC3\0MICBIAS2\0RECEIVER\0Left AMP SPK\0SPEAKER\0Right AMP SPK\0BLUETOOTH SPK\0ABOX UAIF3 Playback\0ABOX UAIF3 Capture\0BLUETOOTH MIC\0USB SPK\0ABOX USB Playback\0ABOX USB Capture\0USB MIC\0FWD SPK\0ABOX FWD Playback\0ABOX FWD Capture\0FWD MIC\0VTS Virtual Output\0VTS Virtual Output Mux\0PAD DPDM\0DMIC1\0PAD DPDM\0DMIC2\0PAD DPDM\0DMIC3";
-				samsung,codec = <0x0c 0x0b 0xffffffff>;
+				sound-max-frequency = <0xc65d40>;
+				clock-names = "pclk\0sclk";
+				clocks = <0xffffffff 0x84 0xffffffff 0x9a>;
+				pinctrl-names = "default";
+				pinctrl-0 = <0x0e>;
+				MICBIAS1-supply = <0x0f>;
+				MICBIAS2-supply = <0x10>;
+				MICBIAS3-supply = <0x11>;
+				samsung,routing = "DMIC1\0MICBIAS1\0DMIC2\0MICBIAS2\0DMIC3\0MICBIAS3\0RECEIVER\0Left AMP SPK\0SPEAKER\0Right AMP SPK\0BLUETOOTH SPK\0ABOX UAIF3 Playback\0ABOX UAIF3 Capture\0BLUETOOTH MIC\0USB SPK\0ABOX USB Playback\0ABOX USB Capture\0USB MIC\0FWD SPK\0ABOX FWD Playback\0ABOX FWD Capture\0FWD MIC\0VTS Virtual Output\0VTS Virtual Output Mux\0PAD DPDM\0DMIC1\0PAD DPDM\0DMIC2\0PAD DPDM\0DMIC3";
+				samsung,codec = <0x0d 0x0c 0xffffffff>;
 				samsung,prefix = "Left\0Right\0VTS";
 				samsung,aux = <0xffffffff 0xffffffff>;
 
