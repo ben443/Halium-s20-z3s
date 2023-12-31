@@ -3,3 +3,7 @@ out/
 kout/
 scripts/
 AnyKernel3/
+builds/
+*.img
+*.zip
+AIK/
