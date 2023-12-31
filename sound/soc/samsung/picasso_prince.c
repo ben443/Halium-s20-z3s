@@ -29,12 +29,11 @@
 
 #include <soc/samsung/exynos-cpupm.h>
 
-#define MADERA_BASECLK_96K	96151000
 #define MADERA_BASECLK_48K	49152000
 #define MADERA_BASECLK_44K1	45158400
 
-#define PRINCE_AMP_RATE	96000
-#define PRINCE_AMP_BCLK	(PRINCE_AMP_RATE * 16 * 8)
+#define PRINCE_AMP_RATE	48000
+#define PRINCE_AMP_BCLK	(PRINCE_AMP_RATE * 16 * 4)
 
 #define CLK_SRC_SCLK 0
 #define CLK_SRC_LRCLK 1
@@ -69,7 +68,7 @@
 					+ DP_COUNT + DDMA_COUNT + DUAL_COUNT)
 #define UAIF_COUNT			7
 
-static unsigned int baserate = MADERA_BASECLK_96K;
+static unsigned int baserate = MADERA_BASECLK_48K;
 
 enum FLL_ID { FLL1, FLL2, FLL3, FLLAO };
 enum CLK_ID { SYSCLK, ASYNCCLK, DSPCLK, OPCLK, OUTCLK };
@@ -89,7 +88,7 @@ struct clk_conf {
 	bool valid;
 };
 
-#define MADERA_MAX_CLOCKS 11
+#define MADERA_MAX_CLOCKS 10
 
 struct picasso_drvdata {
 	struct device *dev;
@@ -102,8 +101,6 @@ struct picasso_drvdata {
 	struct clk_conf dspclk;
 	struct clk_conf opclk;
 	struct clk_conf outclk;
-	struct clk_conf pclk;
-	struct clk_conf 0sclk;
 
 	struct notifier_block nb;
 
@@ -143,7 +140,7 @@ static int map_clkid_with_name(const char *name)
 		return DSPCLK;
 	else if (!strcmp(name, "opclk"))
 		return OPCLK;
-	else if (!strcmp(name, "0sclk"))
+	else if (!strcmp(name, "outclk"))
 		return OUTCLK;
 	else
 		return -1;
@@ -182,8 +179,33 @@ static int prince_start_fll(struct snd_soc_card *card,
 
 	pll_id = map_fllid_with_name(config->name);
 	switch (pll_id) {
-	
+	case FLL1:
+		if (forced_mclk1) {
+			/* use 32kHz input to avoid overclocking the FLL when
+			 * forcing a specific MCLK frequency into the codec
+			 * FLL calculations
+			 */
+
+			fin = forced_mclk1;
+		} else {
+			fsrc = config->source;
+			fin = config->rate;
+		}
+
+		if (forced_sysclk)
+			fout = forced_sysclk;
+		else
+			fout = config->fout;
+		break;
+	case FLL2:
+	case FLLAO:
+		fsrc = config->source;
+		fin = config->rate;
+		fout = config->fout;
+		break;
 	default:
+		dev_err(card->dev, "Unknown FLLID for %s\n", config->name);
+	}
 
 	dev_dbg(card->dev, "Setting %s fsrc=%d fin=%uHz fout=%uHz\n",
 		config->name, fsrc, fin, fout);
@@ -340,7 +362,7 @@ static int prince_hw_params(struct snd_pcm_substream *substream,
 
 	/* Treat sysclk rate zero as automatic mode */
 	if (!drvdata->sysclk.rate) {
-		if (rate % 9000)
+		if (rate % 4000)
 			baserate = MADERA_BASECLK_44K1;
 		else
 			baserate = MADERA_BASECLK_48K;
@@ -400,7 +422,7 @@ static int dsif_hw_params(struct snd_pcm_substream *substream,
 	int tx_slot[] = {0, 1};
 
 	/* bclk ratio 64 for DSD64, 128 for DSD128 */
-	snd_soc_dai_set_bclk_ratio(cpu_dai, 128);
+	snd_soc_dai_set_bclk_ratio(cpu_dai, 64);
 
 	/* channel map 0 1 if left is first, 1 0 if right is first */
 	snd_soc_dai_set_channel_map(cpu_dai, 2, tx_slot, 0, NULL);
