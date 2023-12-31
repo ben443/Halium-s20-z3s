@@ -362,6 +362,8 @@ HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
 
 HOSTCC       = gcc
 HOSTCXX      = g++
+HOSTCC       = clang
+HOSTCXX      = clang++
 KBUILD_HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 \
 		-fomit-frame-pointer -std=gnu89 $(HOST_LFS_CFLAGS) \
 		$(HOSTCFLAGS)
@@ -372,13 +374,13 @@ KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
 # Make variables (CC, etc...)
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
-CC              = /home/chanz22/tc/llvm-12.0.0/bin/clang
+CC              = /home/chanz22/tc/puppy_clang/bin/clang
 CPP		= $(CC) -E
-AR		= $(CROSS_COMPILE)ar
-NM		= $(CROSS_COMPILE)nm
-STRIP		= $(CROSS_COMPILE)strip
-OBJCOPY		= $(CROSS_COMPILE)objcopy
-OBJDUMP		= $(CROSS_COMPILE)objdump
+AR		= /home/chanz22/tc/puppy_clang/bin/llvm-ar
+NM		= /home/chanz22/tc/puppy_clang/bin/llvm-nm
+STRIP		= /home/chanz22/tc/puppy_clang/bin/llvm-strip
+OBJCOPY		= /home/chanz22/tc/puppy_clang/bin/llvm-objcopy
+OBJDUMP		= /home/chanz22/tc/puppy_clang/bin/llvm-objdump
 LEX		= flex
 YACC		= bison
 AWK		= awk
@@ -392,7 +394,7 @@ PYTHON3		= python3
 CHECK		= sparse
 
 ifeq ($(CONFIG_EXYNOS_FMP_FIPS),)
-READELF        = $(CROSS_COMPILE)readelf
+READELF        = /home/chanz22/tc/puppy_clang/bin/llvm-readelf
 export READELF
 endif
 
@@ -499,8 +501,7 @@ export SEC_BUILD_CONF_VENDOR_BUILD_OS
 
 ifeq ($(cc-name),clang)
 ifneq ($(CROSS_COMPILE),)
-#CLANG_TRIPLE	?= $(CROSS_COMPILE)
-CLANG_TRIPLE	?= $(srctree)/toolchain/clang/host/linux-x86/clang-r349610-jopp/bin/aarch64-linux-gnu-
+CLANG_TRIPLE	?= aarch64-linux-gnu-
 CLANG_FLAGS	+= --target=$(notdir $(CLANG_TRIPLE:%-=%))
 ifeq ($(shell $(srctree)/scripts/clang-android.sh $(CC) $(CLANG_FLAGS)), y)
 $(error "Clang with Android --target detected. Did you specify CLANG_TRIPLE?")
@@ -629,13 +630,12 @@ endif
 
 # Make toolchain changes before including arch/$(SRCARCH)/Makefile to ensure
 # ar/cc/ld-* macros return correct values.
-ifdef CONFIG_LTO_CLANG
+
 # use llvm-ar for building symbol tables from IR files, and llvm-nm instead
 # of objdump for processing symbol versions and exports
-LLVM_AR		:= llvm-ar
-LLVM_NM		:= llvm-nm
+LLVM_AR		:= /home/chanz22/tc/puppy_clang/bin/llvm-ar
+LLVM_NM		:= /home/chanz22/tc/puppy_clang/bin/llvm-nm
 export LLVM_AR LLVM_NM
-endif
 
 # The arch Makefile can set ARCH_{CPP,A,C}FLAGS to override the default
 # values of the respective KBUILD_* variables
