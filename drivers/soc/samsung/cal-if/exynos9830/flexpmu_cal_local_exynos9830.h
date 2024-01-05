@@ -756,15 +756,13 @@ struct pmucal_seq embedded_g3d_on[] = {
 };
 
 struct pmucal_seq embedded_g3d_save[] = {
-//	PMUCAL_SEQ_DESC(PMUCAL_SAVE_RESTORE, "HPM0_THRV_DD", 0x18430000, 0x80, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "HPM0_CONFIG", 0x18430000, 0x0, 0xffffffff, 0x52000001, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "HPM0_CONFIG_2", 0x18430000, 0x88, 0xffffffff, 0x5000, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "HPM0_CONTROL", 0x18430000, 0x4, 0xffffffff, 0x1, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WAIT, "HPM0_CONTROL", 0x18430000, 0x4, (0x1 << 0), (0x0 << 0), 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "HPM0_CONFIG", 0x18430000, 0x0, 0xffffffff, 0x52000801, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "HPM0_CONFIG_2", 0x18430000, 0x88, 0xffffffff, 0x5001, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "HPM0_CONTROL", 0x18430000, 0x4, 0xffffffff, 0x1, 0, 0, 0xffffffff, 0),
-//	PMUCAL_SEQ_DESC(PMUCAL_WAIT, "HPM0_CONTROL", 0x18430000, 0x4, (0x1 << 0), (0x0 << 0), 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHM_AXI_G3DSFR_PCH", 0x17400000, 0x7000, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHM_AXI_P_G3D_PCH", 0x17400000, 0x7004, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHS_ACE_D0_G3D_PCH", 0x17400000, 0x7008, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHS_ACE_D1_G3D_PCH", 0x17400000, 0x700C, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHS_ACE_D2_G3D_PCH", 0x17400000, 0x7010, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHS_ACE_D3_G3D_PCH", 0x17400000, 0x7014, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_READ, "DBG_NFO_PCH_CON_LHS_AXI_G3DSFR_PCH", 0x17400000, 0x7018, 0xffffffff, 0, 0, 0, 0xffffffff, 0),
 };
 
 struct pmucal_seq embedded_g3d_off[] = {

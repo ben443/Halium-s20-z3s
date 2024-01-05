@@ -1555,7 +1555,7 @@ static __init int cpufreq_read_gpu_min(char *gpu_min)
 }
 __setup("gpu_min=", cpufreq_read_gpu_min);
 
-unsigned long arg_mif_min = 421000;
+unsigned long arg_mif_min = 546000;
 
 static __init int cpufreq_read_mif_min(char *mif_min)
 {
@@ -1626,7 +1626,7 @@ static __init int cpufreq_read_cpu_max_c3(char *cpu_max_c3)
 }
 __setup("cpu_max_c3=", cpufreq_read_cpu_max_c3);
 
-unsigned long arg_gpu_max = 879000;
+unsigned long arg_gpu_max = 1001000;
 
 static __init int cpufreq_read_gpu_max(char *gpu_max)
 {

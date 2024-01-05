@@ -141,7 +141,7 @@ struct pmucal_seq pmucal_lpm_init[] = {
 	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "SYSREG_TNR_MEMCLK", 0x17720000, 0x0108, (0x1 << 0), (0x0 << 0), 0, 0, 0xffffffff, 0),
 	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "SYSREG_VRA_MEMCLK", 0x18020000, 0x0108, (0x1 << 0), (0x0 << 0), 0, 0, 0xffffffff, 0),
 	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "SYSREG_VTS_MEMCLK", 0x15510000, 0x0108, (0x1 << 0), (0x0 << 0), 0, 0, 0xffffffff, 0),
-	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "BURNIN_CTRL", 0x15860000, 0x0a08, (0x3 << 0), (0x2 << 0), 0, 0, 0xffffffff, 0),
+	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "BURNIN_CTRL", 0x14060000, 0x4684, (0xfff << 0), (0x3b9 << 0), 0, 0, 0xffffffff, 0),
 	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "PMU_ALIVE/BURNIN_CTRL", 0x15860000, 0x0a08, (0xff << 16), (0x0 << 16), 0, 0, 0xffffffff, 0),
 	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "EXT_REGULATOR_MAIN_DURATION", 0x15860000, 0x0e00, (0xffffffff << 0), (0x7D0 << 0), 0, 0, 0xffffffff, 0),
 	PMUCAL_SEQ_DESC(PMUCAL_WRITE, "EXT_REGULATOR_SUB_DURATION", 0x15860000, 0x0e04, (0xffffffff << 0), (0x528 << 0), 0, 0, 0xffffffff, 0),
