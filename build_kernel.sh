@@ -8,6 +8,8 @@ export LOG_FILE=puppy.log
 export OUT_DIR="/home/chanz22/Documentos/GitHub/exynos990/kout"
 export AK3="/home/chanz22/Documentos/GitHub/exynos990/AnyKernel3"
 export IMAGE_NAME=PuppyKernel
+export KERNELZIP="PuppyKernel.zip"
+export KERNELVERSION=1.2
 
 export PLATFORM_VERSION=11
 export ANDROID_MAJOR_VERSION=r 
@@ -28,30 +30,52 @@ cd /home/chanz22/Documentos/GitHub/exynos990/toolchain/
 
 cd /home/chanz22/Documentos/GitHub/exynos990/
 
+cp "$OUT_DIR"/arch/arm64/boot/Image "$AK3"/Image
+
+export IMAGE="$AK3"/Image
+
+echo ""
+echo ""
 echo "******************************************"
 echo ""
-echo "generating Anykernel3 zip..."
+echo "Checking for required files..."
 echo ""
 echo "******************************************"
 
-IMAGE="$OUT_DIR/arch/arm64/boot/Image"
+if [ ! -f "$IMAGE" ]; then
+    echo "Compilation failed. Required file '$IMAGE' not found. Check logs."
+    exit 1
+else
+    echo "File '$IMAGE' found. Proceeding to the next step."
+fi
+
+echo "Required files found. Proceeding to the next step."
+
+echo ""
+echo ""
+echo "******************************************"
+echo ""
+echo "Generating Anykernel3 zip..."
+echo ""
+echo "******************************************"
+
+rm -r AnyKernel3/*.zip
 
 if [[ -f "$IMAGE" ]]; then
     KERNELZIP="PuppyKernel.zip"
 
-    cp "$OUT_DIR"/arch/arm64/boot/Image "$AK3"/Image
-    # Create the AnyKernel package
     (cd "AnyKernel3" && zip -r9 "$KERNELZIP" .) || error_exit "Error creating the AnyKernel package"
 
-mv "$KERNELZIP" "$CDIR"/builds/PuppyKernel.zip
-
+    echo "Zip done..."
 fi
 
-echo "zip done..."
+    cd AnyKernel3
+
+    mv "$KERNELZIP" "$CDIR"/builds/PuppyKernel"$KERNELVERSION".zip
 
 echo ""
+echo "proceeding to step 2..."
 echo ""
-
 echo "******************************************"
 echo ""
 echo "generating flashable image..."
@@ -91,19 +115,17 @@ cd "$CDIR"
 mv "$CDIR"/AIK/image-new.img "$CDIR"/builds/"$IMAGE_NAME".img
 
 if [ -d "kout" ]; then
-    rm -r "kout"
+    rm -rf "kout"
     echo "directory removed.."
 else
     echo "pff. There is no 'kout' directory."
 fi
 
-echo "image done..."
-
-clear
+echo "image done.."
 
     DATE_END=$(date +"%s")
     DIFF=$(($DATE_END - $DATE_START))
+   
+   echo -e "\nElapsed time: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.\n"
 
-    echo -e "\nCompilation completed successfully. Elapsed time: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.\n"
-
-echo "done! you can find your zip & image at /builds"
+echo "find your zip and image in build dir..."
