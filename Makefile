@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 4
 PATCHLEVEL = 19
-SUBLEVEL = 89
+SUBLEVEL = 87
 EXTRAVERSION =
 NAME = "People's Front"
 
@@ -319,9 +319,8 @@ include scripts/subarch.include
 # Alternatively CROSS_COMPILE can be set in the environment.
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
-SUBARCH		= arm64
 ARCH            = arm64
-CROSS_COMPILE	?= $(srctree)/toolchain/gcc-cfp/gcc-cfp-jopp-only/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+CROSS_COMPILE	?= aarch64-linux-gnu
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -360,8 +359,6 @@ HOST_LFS_CFLAGS := $(shell getconf LFS_CFLAGS 2>/dev/null)
 HOST_LFS_LDFLAGS := $(shell getconf LFS_LDFLAGS 2>/dev/null)
 HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
 
-HOSTCC       = gcc
-HOSTCXX      = g++
 HOSTCC       = clang
 HOSTCXX      = clang++
 KBUILD_HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 \
@@ -372,15 +369,15 @@ KBUILD_HOSTLDFLAGS  := $(HOST_LFS_LDFLAGS) $(HOSTLDFLAGS)
 KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
 
 # Make variables (CC, etc...)
-AS		= $(CROSS_COMPILE)as
-LD		= $(CROSS_COMPILE)ld
+AS		= llvm-as
+LD		= ld
 CC              = /home/chanz22/tc/puppy_clang/bin/clang
 CPP		= $(CC) -E
-AR		= /home/chanz22/tc/puppy_clang/bin/llvm-ar
-NM		= /home/chanz22/tc/puppy_clang/bin/llvm-nm
-STRIP		= /home/chanz22/tc/puppy_clang/bin/llvm-strip
-OBJCOPY		= /home/chanz22/tc/puppy_clang/bin/llvm-objcopy
-OBJDUMP		= /home/chanz22/tc/puppy_clang/bin/llvm-objdump
+AR		= llvm-ar
+NM		= llvm-nm
+STRIP		= llvm-strip
+OBJCOPY		= llvm-objcopy
+OBJDUMP		= llvm-objdump
 LEX		= flex
 YACC		= bison
 AWK		= awk
