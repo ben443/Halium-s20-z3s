@@ -320,7 +320,7 @@ include scripts/subarch.include
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
 ARCH            = arm64
-CROSS_COMPILE	?= aarch64-linux-gnu-
+CROSS_COMPILE	?= llvm-
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -359,8 +359,8 @@ HOST_LFS_CFLAGS := $(shell getconf LFS_CFLAGS 2>/dev/null)
 HOST_LFS_LDFLAGS := $(shell getconf LFS_LDFLAGS 2>/dev/null)
 HOST_LFS_LIBS := $(shell getconf LFS_LIBS 2>/dev/null)
 
-HOSTCC       = clang
-HOSTCXX      = clang++
+HOSTCC       = $(CCACHE) clang
+HOSTCXX      = $(CCACHE) clang++
 KBUILD_HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 \
 		-fomit-frame-pointer -std=gnu89 $(HOST_LFS_CFLAGS) \
 		$(HOSTCFLAGS)
@@ -369,15 +369,15 @@ KBUILD_HOSTLDFLAGS  := $(HOST_LFS_LDFLAGS) $(HOSTLDFLAGS)
 KBUILD_HOSTLDLIBS   := $(HOST_LFS_LIBS) $(HOSTLDLIBS)
 
 # Make variables (CC, etc...)
-AS		= llc
-LD		= ld.lld
-CC              = clang
+AS		= $(CCACHE) llvm-as
+LD		= $(CCACHE) ld.lld
+CC              = $(CCACHE) /home/chanz22/tc/puppy_clang/bin/clang
 CPP		= $(CC) -E
-AR		= llvm-ar
+AR		= $(CCACHE) llvm-ar
 NM		= llvm-nm
 STRIP		= llvm-strip
-OBJCOPY		= llvm-objcopy
-OBJDUMP		= llvm-objdump
+OBJCOPY		= $(CCACHE) llvm-objcopy
+OBJDUMP		= $(CCACHE) llvm-objdump
 LEX		= flex
 YACC		= bison
 AWK		= awk
