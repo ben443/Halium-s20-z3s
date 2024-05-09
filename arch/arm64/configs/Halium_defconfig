@@ -81,7 +81,7 @@ CONFIG_ARM64_PAN=y
 # CONFIG_ARM64_VHE is not set
 CONFIG_SEC_ARM64_LSE_ATOMICS=y
 CONFIG_RANDOMIZE_BASE=y
-CONFIG_CMDLINE="androidboot.boot_devices=13100000.ufs console=tty0 datapart=/dev/sda32 systempart=/dev/disk/by-partlabel/system"
+CONFIG_CMDLINE="androidboot.boot_devices=13100000.ufs console=tty0"
 CONFIG_CMDLINE_EXTEND=y
 CONFIG_CMDLINE_FORCE=Y
 # CONFIG_EFI is not set
